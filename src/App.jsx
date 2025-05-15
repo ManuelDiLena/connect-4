@@ -1,34 +1,23 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import LOGO from './assets/main-logo.png';
+import CPUICON from './assets/cpu-icon.png';
+import PLAYERICON from './assets/player-icon.png';
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    <div className='main__container buttons__container'>
+      <img src={LOGO} className='main__logo' alt='logo' />
+      <button className='main__button button__pink'>
+        PLAY vs CPU
+        <img src={CPUICON} className='button__icon cpu-icon' alt='cpu icon' />
+      </button>
+      <button className='main__button button__yellow'>
+        PLAY vs PLAYER 
+        <img src={PLAYERICON} className='button__icon player-icon' alt='player icon' />
+      </button>
+      <button className='main__button button__light'>
+        GAME RULES
+      </button>
+    </div>
   )
 }
 
