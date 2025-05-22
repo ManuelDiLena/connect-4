@@ -1,77 +1,42 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import PLAYER1DISK from '../../assets/player-1-disk.svg?react';
 import PLAYER2DISK from '../../assets/player-2-disk.svg?react';
-
-const usePlay = () => {
-  const [grid, setGrid] = useState([[0,0,0,0,0,0,0],
-                                    [0,0,0,0,0,0,0],
-                                    [0,0,0,0,0,0,0],
-                                    [0,0,0,0,0,0,0],
-                                    [0,0,0,0,0,0,0],
-                                    [0,0,0,0,0,0,0]]);
-  const [column, setColumn] = useState(null);
-  const [row, setRow] = useState(null);
-  const [play, setPlay] = useState(null);
-  const [player, setPlayer] = useState(1);
-
-  const changePlayer = () => (player === 1) ? setPlayer(2) : setPlayer(1);
-
-  const setNewDisk = (col) => {
-    let colNum;
-    let rowNum;
-    for (let index in grid) {
-      if (grid[index][col] === 0) {
-        colNum = col;
-        rowNum = index;
-      } else {
-        break;
-      }
-    };
-    setColumn(colNum);
-    setRow(rowNum);
-    setPlay(player);
-  };
-  
-  const updateGrid = () => {
-    if (row != null && column != null) {
-      grid[row][column] = play;
-      setGrid(grid);
-    }
-  }
-
-  return {
-    grid,
-    row,
-    column,
-    play,
-    setNewDisk,
-    updateGrid,
-    changePlayer,
-  }
-};
+import { usePlay } from './game';
+import './grid.css';
 
 function Grid() {
     const { grid, column, row, play, updateGrid, setNewDisk, changePlayer } = usePlay();
-    const gridPosition = [8,96,184,272,360,448];
+    const gridPositionRow = [16,104,192,280,368,456];
+    const gridPositionColumn = [18,105,193,281,369,457,545];
 
-    const renderGrid = (i) => {
-      return grid.map((array, index) => {
-        if (array[i] === 1) {
-          return (
-            <svg className='disk'>
-              <PLAYER1DISK key={index} x='7' y={gridPosition[index]} width='70' height='70' />
-            </svg>
-          )
-        } else if (array[i] === 2) {
-          return (
-            <svg className='disk'>
-              <PLAYER2DISK key={index} x='7' y={gridPosition[index]} width='70' height='70' />
-            </svg>
-          )
-        } else {
-          return (null)
-        }
+    const renderDisk = () => {
+      return grid.map((arrayRow, rowIndex) => {
+        return arrayRow.map((array, columnIndex) => {
+          if (array === 1) {
+            return (
+              <motion.svg
+                className='disk'
+                key={rowIndex + columnIndex}
+                animate={{ top: gridPositionRow[rowIndex], left: gridPositionColumn[columnIndex] }}
+              >
+                <PLAYER1DISK height='70' width='70' />
+              </motion.svg>
+            )
+          } else if (array === 2) {
+            return (
+              <motion.svg
+                className='disk'
+                key={rowIndex + columnIndex}
+                animate={{ top: gridPositionRow[rowIndex], left: gridPositionColumn[columnIndex] }}
+              >
+                <PLAYER2DISK height='70' width='70' />
+              </motion.svg>
+            )
+          } else {
+            return (null)
+          }
+        })
       })
     }
 
@@ -79,29 +44,12 @@ function Grid() {
       updateGrid()
     }, [column, row])
 
-    let renderColumn;
-    if (column === 0) {
-      renderColumn = 18;
-    } else if (column === 1) {
-      renderColumn = 105;
-    } else if (column === 2) {
-      renderColumn = 193;
-    } else if (column === 3) {
-      renderColumn = 281;
-    } else if (column === 4) {
-      renderColumn = 369;
-    } else if (column === 5) {
-      renderColumn = 457;
-    } else if (column === 6) {
-      renderColumn = 545;
-    }
-
     const variants = {
       drop: {
-        left: renderColumn,
-        top: [0,gridPosition[row] + 8],
+        left: gridPositionColumn[column],
+        top: [0,gridPositionRow[row]],
         transition: {
-          duration: 1,
+          duration: 0.5,
         },
       }
     }
@@ -110,32 +58,26 @@ function Grid() {
       <>
         <svg className='column column-1' onClick={() => { setNewDisk(0); changePlayer() }}>
           <rect x='0' y='0' width='85' height='528' fill='none' />
-          { renderGrid(0) }
         </svg>
         <svg className='column column-2' onClick={() => { setNewDisk(1); changePlayer() }}>
           <rect x='0' y='0' width='85' height='528' fill='none' />
-          { renderGrid(1) }
         </svg>
         <svg className='column column-3' onClick={() => { setNewDisk(2); changePlayer() }}>
           <rect x='0' y='0' width='85' height='528' fill='none' />
-          { renderGrid(2) }
         </svg>
         <svg className='column column-4' onClick={() => { setNewDisk(3); changePlayer() }}>
           <rect x='0' y='0' width='85' height='528' fill='none' />
-          { renderGrid(3) }
         </svg>
         <svg className='column column-5' onClick={() => { setNewDisk(4); changePlayer() }}>
           <rect x='0' y='0' width='85' height='528' fill='none' />
-          { renderGrid(4) }
         </svg>
         <svg className='column column-6' onClick={() => { setNewDisk(5); changePlayer() }}>
           <rect x='0' y='0' width='85' height='528' fill='none' />
-          { renderGrid(5) }
         </svg>
         <svg className='column column-7' onClick={() => { setNewDisk(6); changePlayer() }}>
           <rect x='0' y='0' width='85' height='528' fill='none' />
-          { renderGrid(6) }
         </svg>
+        { renderDisk() }
         {
           row != null && column != null && play === 1 &&
           <motion.svg
@@ -160,4 +102,4 @@ function Grid() {
     );
   }
 
-  export {Grid};
+  export default Grid;

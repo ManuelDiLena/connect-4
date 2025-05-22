@@ -1,17 +1,21 @@
 import { Link } from 'react-router-dom';
 import './game.css';
-import { Grid } from './Grid';
 import LOGO from '../../assets/main-logo.png';
 import PLAYER1 from '../../assets/player-1.png';
 import PLAYER2 from '../../assets/player-2.png';
 import BlackBoard from '../../assets/board-black.svg?react';
 import WhiteBoard from '../../assets/board-white.svg?react';
+import Grid from './Grid';
+import { usePlay } from './game';
 
 const Game = () => {
+  const { player } = usePlay();
+  console.log(player);
+
   return (
     <div className='container game_container'>
       <div className='menu__container'>
-        <Link className='game__btn menu_btn'>MENU</Link>
+        <Link className='game__btn menu__btn'>MENU</Link>
         <img src={LOGO} alt='logo' className='main__logo' />
         <button className='game__btn restart__btn'>RESTART</button>
       </div>
@@ -31,9 +35,9 @@ const Game = () => {
           <h2>PLAYER 2</h2>
           <p>0</p>
         </article>
-        <div className='timer__container'>
+        <div className={(player === 1) ? 'timer__container' : 'timer__container timer-2'}>
           <div className='timer'>
-            <h2>PLAYER 1 TURN</h2>
+            <h2>{(player === 1) ? `PLAYER 1 TURN` : `PLAYER 2 TURN`}</h2>
             <p>30s</p>
           </div>
         </div>

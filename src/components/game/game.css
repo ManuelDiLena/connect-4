@@ -4,13 +4,14 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
+  overflow: hidden;
 }
 
 .menu__container {
   display: grid;
-  width: 90vw;
+  width: 100vw;
   max-width: 750px;
-  min-width: 310px;
+  min-width: 320px;
   margin: 0 auto;
   grid-template-columns: 1fr 1fr 1fr;
   justify-items: center;
@@ -18,8 +19,7 @@
 }
 
 .game__btn {
-  width: 110px;
-  padding: 10px 20px;
+  padding: 13px 25px;
   font-size: 1.5rem;
   font-weight: 600;
   border-radius: 40px;
@@ -60,7 +60,7 @@
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  margin: 76px 0 136px 0;
+  margin: 45px 0 105px 0;
 }
 
 .player__card {
@@ -120,66 +120,6 @@
   background-size: 100%;
 }
 
-.game__board .column-1 {
-  position: absolute;
-  width: 85px;
-  height: 584px;
-  top: 10px;
-  left: 10px;
-}
-
-.game__board .column-2 {
-  position: absolute;
-  width: 85px;
-  height: 584px;
-  top: 10px;
-  left: 98px;
-}
-
-.game__board .column-3 {
-  position: absolute;
-  width: 85px;
-  height: 584px;
-  top: 10px;
-  left: 186px;
-}
-
-.game__board .column-4 {
-  position: absolute;
-  width: 85px;
-  height: 584px;
-  top: 10px;
-  left: 274px;
-}
-
-.game__board .column-5 {
-  position: absolute;
-  width: 85px;
-  height: 584px;
-  top: 10px;
-  left: 362px;
-}
-
-.game__board .column-6 {
-  position: absolute;
-  width: 85px;
-  height: 584px;
-  top: 10px;
-  left: 450px;
-}
-
-.game__board .column-7 {
-  position: absolute;
-  width: 85px;
-  height: 584px;
-  top: 10px;
-  left: 538px;
-}
-
-.disk {
-  z-index: -3;
-}
-
 .winner__color {
   position: absolute;
   width: 100%;
@@ -197,6 +137,10 @@
   bottom: -140px;
   left: calc(50% - 100px);
   color: var(--color-light)
+}
+
+.timer-2 {
+  color: var(--color-dark);
 }
 
 .timer {
@@ -220,9 +164,4 @@
   position: absolute;
   top: 45%;
   left: 30%;
-}
-
-.test-disk-container {
-  position: absolute;
-  z-index: 1;
 }
