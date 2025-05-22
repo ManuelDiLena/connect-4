@@ -7,10 +7,10 @@ import BlackBoard from '../../assets/board-black.svg?react';
 import WhiteBoard from '../../assets/board-white.svg?react';
 import Grid from './Grid';
 import { usePlay } from './game';
+import Timer from './Timer';
 
 const Game = () => {
-  const { player } = usePlay();
-  console.log(player);
+  const { grid, column, row, player, play, timerCounter, setTimerCounter, updateGrid, changePlayer, setNewDisk } = usePlay();
 
   return (
     <div className='container game_container'>
@@ -28,19 +28,26 @@ const Game = () => {
         <div className='game__board'>
           <WhiteBoard className='white-board' />
           <BlackBoard className='black-board' />
-          <Grid />
+          <Grid 
+            grid={grid}
+            column={column}
+            row={row}
+            play={play}
+            updateGrid={updateGrid}
+            changePlayer={changePlayer}
+            setNewDisk={setNewDisk}
+          />
         </div>
         <article className='player__card player-2-card'>
           <img src={PLAYER2} alt='player2' />
           <h2>PLAYER 2</h2>
           <p>0</p>
         </article>
-        <div className={(player === 1) ? 'timer__container' : 'timer__container timer-2'}>
-          <div className='timer'>
-            <h2>{(player === 1) ? `PLAYER 1 TURN` : `PLAYER 2 TURN`}</h2>
-            <p>30s</p>
-          </div>
-        </div>
+        <Timer 
+          timerCounter={timerCounter}
+          player={player}
+          setTimerCounter={setTimerCounter}
+        />
       </div>
       <div className='winner__color'></div>
     </div>

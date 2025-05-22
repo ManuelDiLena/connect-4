@@ -2,13 +2,15 @@ import { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import PLAYER1DISK from '../../assets/player-1-disk.svg?react';
 import PLAYER2DISK from '../../assets/player-2-disk.svg?react';
-import { usePlay } from './game';
 import './grid.css';
 
-function Grid() {
-    const { grid, column, row, play, updateGrid, setNewDisk, changePlayer } = usePlay();
+const Grid = ({ grid, row, column, play, setNewDisk, updateGrid, changePlayer }) => {
     const gridPositionRow = [16,104,192,280,368,456];
     const gridPositionColumn = [18,105,193,281,369,457,545];
+
+    useEffect(() => {
+      updateGrid()
+    }, [row, column])
 
     const renderDisk = () => {
       return grid.map((arrayRow, rowIndex) => {
@@ -18,7 +20,7 @@ function Grid() {
               <motion.svg
                 className='disk'
                 key={rowIndex + columnIndex}
-                animate={{ top: gridPositionRow[rowIndex], left: gridPositionColumn[columnIndex] }}
+                style={{ top: gridPositionRow[rowIndex], left: gridPositionColumn[columnIndex] }}
               >
                 <PLAYER1DISK height='70' width='70' />
               </motion.svg>
@@ -28,7 +30,7 @@ function Grid() {
               <motion.svg
                 className='disk'
                 key={rowIndex + columnIndex}
-                animate={{ top: gridPositionRow[rowIndex], left: gridPositionColumn[columnIndex] }}
+                style={{ top: gridPositionRow[rowIndex], left: gridPositionColumn[columnIndex] }}
               >
                 <PLAYER2DISK height='70' width='70' />
               </motion.svg>
@@ -40,16 +42,11 @@ function Grid() {
       })
     }
 
-    useEffect(() => {
-      updateGrid()
-    }, [column, row])
-
     const variants = {
       drop: {
-        left: gridPositionColumn[column],
         top: [0,gridPositionRow[row]],
         transition: {
-          duration: 0.5,
+          duration: 0.3,
         },
       }
     }
@@ -81,9 +78,10 @@ function Grid() {
         {
           row != null && column != null && play === 1 &&
           <motion.svg
-            variant={variants}
+            variants={variants}
             animate={'drop'}
             className='test-disk-container'
+            style={{ left: gridPositionColumn[column] }}
           >
             <PLAYER1DISK width='70' height='70' />
           </motion.svg>
@@ -91,9 +89,10 @@ function Grid() {
         {
           row != null && column != null && play === 2 &&
           <motion.svg
-            variant={variants}
+            variants={variants}
             animate={'drop'}
             className='test-disk-container'
+            style={{ left: gridPositionColumn[column] }}
           >
             <PLAYER1DISK width='70' height='70' />
           </motion.svg>
