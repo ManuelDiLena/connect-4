@@ -29,3 +29,15 @@ html {
 .container {
   margin: 0 auto;
 }
+
+p {
+  font-size: 5.5rem;
+}
+
+h2 {
+  font-size: 2rem;
+}
+
+h3 {
+  font-size: 1.6rem;
+}

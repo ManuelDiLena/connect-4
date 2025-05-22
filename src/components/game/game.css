@@ -18,7 +18,7 @@
 }
 
 .game__btn {
-  padding: 13px 25px;
+  padding: 10px 22px;
   font-size: 1.5rem;
   font-weight: 600;
   border-radius: 40px;
@@ -119,7 +119,7 @@
   background-size: 100%;
 }
 
-.winner__color {
+.winner-color {
   position: absolute;
   width: 100%;
   height: calc(50% - 245px);
@@ -129,11 +129,19 @@
   background-color: var(--color-bg-variant);
 }
 
+.winner-pink {
+  background-color: var(--color-pink);
+}
+
+.winner-yellow {
+  background-color: var(--color-yellow);
+}
+
 .timer__container {
   position: absolute;
   width: 200px;
-  height: 151px;
-  bottom: calc(50% - 398px);
+  height: 165px;
+  bottom: calc(50% - 410px);
   left: calc(50% - 100px);
   color: var(--color-light)
 }
@@ -146,12 +154,12 @@
   width: 100%;
   height: 100%;
   position: relative;
-  background-size: contain;
+  background-size: 100%;
   background-repeat: no-repeat;
   background-position: center;
 }
 
-.timer h2 {
+.timer h3 {
   position: absolute;
   width: 100%;
   top: 30%;
@@ -167,4 +175,47 @@
   font-size: 5.5rem;
   font-weight: 600;
   text-align: center;
+}
+
+.winner__container {
+  position: absolute;
+  width: 290px;
+  height: 180px;
+  bottom: calc(50%);
+  left: calc(50% - 145px);
+  color: var(--color-dark);
+}
+
+.winner {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  background-size: 100%;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.winner h3 {
+  position: absolute;
+  width: 100%;
+  top: 15%;
+  left: 0;
+  text-align: center;
+}
+
+.winner p {
+  position: absolute;
+  width: 100%;
+  top: 25%;
+  left: 0;
+  font-size: 5.5rem;
+  font-weight: 600;
+  text-align: center;
+}
+
+.winner button {
+  position: absolute;
+  top: 60%;
+  left: calc(50% - 67px);
+  background-color: var(--color-bg-variant);
 }

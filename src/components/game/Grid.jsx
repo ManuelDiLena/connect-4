@@ -1,26 +1,24 @@
-import { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import PLAYER1DISK from '../../assets/player-1-disk.svg?react';
 import PLAYER2DISK from '../../assets/player-2-disk.svg?react';
 import './grid.css';
 
-const Grid = ({ grid, row, column, play, setNewDisk, updateGrid, changePlayer }) => {
+const Grid = ({ grid, setNewDisk, winner }) => {
     const gridPositionRow = [16,104,192,280,368,456];
     const gridPositionColumn = [18,105,193,281,369,457,545];
 
-    useEffect(() => {
-      updateGrid()
-    }, [row, column])
-
     const renderDisk = () => {
+      let counter = 0;
       return grid.map((arrayRow, rowIndex) => {
         return arrayRow.map((array, columnIndex) => {
+          counter += 1;
           if (array === 1) {
             return (
               <motion.svg
                 className='disk'
-                key={rowIndex + columnIndex}
-                style={{ top: gridPositionRow[rowIndex], left: gridPositionColumn[columnIndex] }}
+                animate={{ top: [0, gridPositionRow[rowIndex]], transition: { duration: 0.5 }}}
+                key={counter}
+                style={{ left: gridPositionColumn[columnIndex] }}
               >
                 <PLAYER1DISK height='70' width='70' />
               </motion.svg>
@@ -29,8 +27,9 @@ const Grid = ({ grid, row, column, play, setNewDisk, updateGrid, changePlayer })
             return (
               <motion.svg
                 className='disk'
-                key={rowIndex + columnIndex}
-                style={{ top: gridPositionRow[rowIndex], left: gridPositionColumn[columnIndex] }}
+                animate={{ top: [0, gridPositionRow[rowIndex]], transition: { duration: 0.5 }}}
+                key={counter}
+                style={{ left: gridPositionColumn[columnIndex] }}
               >
                 <PLAYER2DISK height='70' width='70' />
               </motion.svg>
@@ -42,40 +41,52 @@ const Grid = ({ grid, row, column, play, setNewDisk, updateGrid, changePlayer })
       })
     }
 
-    const variants = {
-      drop: {
-        top: [0,gridPositionRow[row]],
-        transition: {
-          duration: 0.3,
-        },
-      }
-    }
-
     return (
       <>
-        <svg className='column column-1' onClick={() => { setNewDisk(0); changePlayer() }}>
+        <svg 
+          className='column column-1' 
+          onClick={() => { if (!winner) setNewDisk(0) }}
+        >
           <rect x='0' y='0' width='85' height='528' fill='none' />
         </svg>
-        <svg className='column column-2' onClick={() => { setNewDisk(1); changePlayer() }}>
+        <svg 
+          className='column column-2' 
+          onClick={() => { if (!winner) setNewDisk(1) }}
+        >
           <rect x='0' y='0' width='85' height='528' fill='none' />
         </svg>
-        <svg className='column column-3' onClick={() => { setNewDisk(2); changePlayer() }}>
+        <svg 
+          className='column column-3' 
+          onClick={() => { if (!winner) setNewDisk(2) }}
+        >
           <rect x='0' y='0' width='85' height='528' fill='none' />
         </svg>
-        <svg className='column column-4' onClick={() => { setNewDisk(3); changePlayer() }}>
+        <svg 
+          className='column column-4' 
+          onClick={() => { if (!winner) setNewDisk(3) }}
+        >
           <rect x='0' y='0' width='85' height='528' fill='none' />
         </svg>
-        <svg className='column column-5' onClick={() => { setNewDisk(4); changePlayer() }}>
+        <svg 
+          className='column column-5' 
+          onClick={() => { if (!winner) setNewDisk(4) }}
+        >
           <rect x='0' y='0' width='85' height='528' fill='none' />
         </svg>
-        <svg className='column column-6' onClick={() => { setNewDisk(5); changePlayer() }}>
+        <svg 
+          className='column column-6' 
+          onClick={() => { if (!winner) setNewDisk(5) }}
+        >
           <rect x='0' y='0' width='85' height='528' fill='none' />
         </svg>
-        <svg className='column column-7' onClick={() => { setNewDisk(6); changePlayer() }}>
+        <svg 
+          className='column column-7' 
+          onClick={() => { if (!winner) setNewDisk(6) }}
+        >
           <rect x='0' y='0' width='85' height='528' fill='none' />
         </svg>
         { renderDisk() }
-        {
+        {/* {
           row != null && column != null && play === 1 &&
           <motion.svg
             variants={variants}
@@ -96,7 +107,7 @@ const Grid = ({ grid, row, column, play, setNewDisk, updateGrid, changePlayer })
           >
             <PLAYER1DISK width='70' height='70' />
           </motion.svg>
-        }
+        } */}
       </>
     );
   }
