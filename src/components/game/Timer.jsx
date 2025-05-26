@@ -5,8 +5,8 @@ import TIMER2 from '../../assets/timer-2.png';
 const Timer = ({ player, timerCounter, setTimerCounter, setWins }) => {
   useEffect(() => {
     const timer = timerCounter > 0 && setInterval(() => setTimerCounter(timerCounter - 1), 1000);
-    timerCounter === 0 && player === 1 && setWins(2)
-    timerCounter === 0 && player === 2 && setWins(1)
+    timerCounter === 0 && player === 1 && setWins(2, false)
+    timerCounter === 0 && player === 2 && setWins(1, false)
     return () => clearInterval(timer)
   }, [timerCounter])
 

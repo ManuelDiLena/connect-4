@@ -11,7 +11,7 @@ import Timer from './Timer';
 import Winner from './Winner';
 
 const Game = () => {
-  const { grid, setNewDisk, player, timerCounter, setTimerCounter, winner, player1Wins, player2Wins, setWhoWins, playAgain, wait } = usePlay();
+  const { grid, setNewDisk, player, timerCounter, setTimerCounter, winner, player1Wins, player2Wins, setWhoWins, playAgain, wait, winnerPos } = usePlay();
 
   return (
     <div className='container game_container'>
@@ -35,6 +35,7 @@ const Game = () => {
             winner={winner}
             wait={wait}
             player={player}
+            winnerPos={winnerPos}
           />
         </div>
         <article className='player__card player-2-card'>
