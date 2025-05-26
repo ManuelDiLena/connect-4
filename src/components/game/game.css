@@ -59,7 +59,7 @@
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  margin: 45px 0 105px 0;
+  margin: 76px 0 136px 0;
 }
 
 .player__card {
@@ -193,6 +193,11 @@
   background-size: 100%;
   background-repeat: no-repeat;
   background-position: center;
+}
+
+.winner button:hover {
+  background-color: var(--color-pink);
+  cursor: pointer;
 }
 
 .winner h3 {
