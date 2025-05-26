@@ -1,14 +1,15 @@
 import { useEffect } from 'react';
 import TIMER1 from '../../assets/timer-1.png';
 import TIMER2 from '../../assets/timer-2.png';
+import './timer.css';
 
-const Timer = ({ player, timerCounter, setTimerCounter, setWins }) => {
+const Timer = ({ player, timerCounter, setTimerCounter, setWins, pause }) => {
   useEffect(() => {
-    const timer = timerCounter > 0 && setInterval(() => setTimerCounter(timerCounter - 1), 1000);
+    const timer = !pause && timerCounter > 0 && setInterval(() => setTimerCounter(timerCounter - 1), 1000);
     timerCounter === 0 && player === 1 && setWins(2, false)
     timerCounter === 0 && player === 2 && setWins(1, false)
     return () => clearInterval(timer)
-  }, [timerCounter])
+  }, [timerCounter, pause])
 
   return (
     <div

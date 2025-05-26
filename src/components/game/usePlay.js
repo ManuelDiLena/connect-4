@@ -19,6 +19,7 @@ const usePlay = () => {
   const [player2Wins, setPlayer2Wins] = useState(0);
   const [wait, setWait] = useState(false);
   const [winnerPos, setWinnerPos] = useState(null);
+  const [pause, setPause] = useState(false);
 
   useEffect(() => {
     setWait(true)
@@ -128,7 +129,9 @@ const usePlay = () => {
     player2Wins,
     playAgain,
     wait,
-    winnerPos
+    winnerPos,
+    pause,
+    setPause
   }
 }
 
