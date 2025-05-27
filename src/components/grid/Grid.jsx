@@ -7,10 +7,12 @@ import MARKER2 from '../../assets/marker-2.svg?react';
 import WINNERCIRCLE from '../../assets/winner-circle.svg?react';
 import './grid.css';
 
-const Grid = ({ grid, setNewDisk, winner, wait, player, winnerPos }) => {
+const Grid = ({ grid, setNewDisk, winner, wait, player, winnerPos, width }) => {
     const [hover, setHover] = useState(null);
-    const gridPositionRow = [16,104,192,280,368,456];
-    const gridPositionColumn = [18,105,193,281,369,457,545];
+    // const gridPositionRow = [16,104,192,280,368,456];
+    // const gridPositionColumn = [18,105,193,281,369,457,545];
+    const gridPositionRow = [2.74,17.81,32.87,47.94,63.01,78.08];
+    const gridPositionColumn = [2.85,16.61,30.54,44.46,58.38,72.31,86.23];
 
     const renderDisk = () => {
       let counter = 0;
@@ -21,22 +23,22 @@ const Grid = ({ grid, setNewDisk, winner, wait, player, winnerPos }) => {
             return (
               <motion.svg
                 className='disk'
-                animate={{ top: [0, gridPositionRow[rowIndex]], transition: { duration: 0.5 }}}
+                animate={{ top: ['0%', gridPositionRow[rowIndex] + '%'], transition: { duration: 0.5 } }}
                 key={counter}
-                style={{ left: gridPositionColumn[columnIndex] }}
+                style={{ left: gridPositionColumn[columnIndex] + '%'}}
               >
-                <PLAYER1DISK height='70' width='70' />
+                <PLAYER1DISK height='100%' width='100%' />
               </motion.svg>
             )
           } else if (array === 2) {
             return (
               <motion.svg
                 className='disk'
-                animate={{ top: [0, gridPositionRow[rowIndex]], transition: { duration: 0.5 }}}
+                animate={{ top: ['0%', gridPositionRow[rowIndex] + '%'], transition: { duration: 0.5 } }}
                 key={counter}
-                style={{ left: gridPositionColumn[columnIndex] }}
+                style={{ left: gridPositionColumn[columnIndex] + '%' }}
               >
-                <PLAYER2DISK height='70' width='70' />
+                <PLAYER2DISK height='100%' width='100%' />
               </motion.svg>
             )
           } else {
@@ -51,7 +53,7 @@ const Grid = ({ grid, setNewDisk, winner, wait, player, winnerPos }) => {
         return (
           <svg
             className='marker'
-            style={{ left: gridPositionColumn[hover] + 15 }}
+            style={{ left: (gridPositionColumn[hover] + 2.53) + '%' }}
           >
             <MARKER1 height='40' width='40' />
           </svg>
@@ -60,7 +62,7 @@ const Grid = ({ grid, setNewDisk, winner, wait, player, winnerPos }) => {
         return (
           <svg
             className='marker'
-            style={{ left: gridPositionColumn[hover] + 15 }}
+            style={{ left: (gridPositionColumn[hover] + 2.53) + '%' }}
           >
             <MARKER2 height='40' width='40' />
           </svg>
@@ -74,9 +76,9 @@ const Grid = ({ grid, setNewDisk, winner, wait, player, winnerPos }) => {
           <svg
             key={index}
             className='winner-circle'
-            style={{ left: gridPositionColumn[pos[1]] +14, top: gridPositionRow[pos[0]] +16 }}
+            style={{ left: (gridPositionColumn[pos[1]] + 2.22) + '%', top: (gridPositionRow[pos[0]] + 3) + '%' }}
           >
-            <WINNERCIRCLE height='40' width='40' />
+            <WINNERCIRCLE height='100%' width='100%' />
           </svg>
         )
       })
@@ -134,7 +136,7 @@ const Grid = ({ grid, setNewDisk, winner, wait, player, winnerPos }) => {
           <rect x='0' y='0' width='85' height='528' fill='none' />
         </svg>
         { renderDisk() }
-        { !wait && !winner && hover != null && hoverMark() }
+        { width > 1060 && !wait && !winner && hover != null && hoverMark() }
         { !wait && winnerPos && renderWinner() }
       </>
     );

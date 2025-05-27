@@ -3,8 +3,8 @@ import './game.css';
 import LOGO from '../../assets/main-logo.png';
 import PLAYER1 from '../../assets/player-1.png';
 import PLAYER2 from '../../assets/player-2.png';
-import BlackBoard from '../../assets/board-black.svg?react';
-import WhiteBoard from '../../assets/board-white.svg?react';
+import BLACKBOARD from '../../assets/board-black.svg';
+import WHITEBOARD from '../../assets/board-white.svg';
 import { usePlay } from './usePlay';
 import Grid from '../grid/Grid';
 import Timer from '../timer/Timer';
@@ -12,6 +12,7 @@ import Winner from '../winner/Winner';
 import Modal from '../modal/Modal';
 
 const Game = () => {
+  const width = window.innerWidth;
   const { grid, setNewDisk, player, timerCounter, setTimerCounter, winner, player1Wins, player2Wins, setWhoWins, playAgain, wait, winnerPos, pause, setPause } = usePlay();
 
   return (
@@ -28,8 +29,8 @@ const Game = () => {
           <p>{player1Wins}</p>
         </article>
         <div className='game__board'>
-          <WhiteBoard className='white-board' />
-          <BlackBoard className='black-board' />
+          <div className='white-board' style={{ backgroundImage: `url(${WHITEBOARD})` }}></div>
+          <div className='black-board' style={{ backgroundImage: `url(${BLACKBOARD})` }}></div>
           <Grid 
             grid={grid}
             setNewDisk={setNewDisk}
@@ -37,6 +38,7 @@ const Game = () => {
             wait={wait}
             player={player}
             winnerPos={winnerPos}
+            width={width}
           />
         </div>
         <article className='player__card player-2-card'>
@@ -49,7 +51,7 @@ const Game = () => {
             timerCounter={timerCounter}
             player={player}
             setTimerCounter={setTimerCounter}
-            setWin={setWhoWins}
+            setWins={setWhoWins}
             pause={pause}
           />
         )}

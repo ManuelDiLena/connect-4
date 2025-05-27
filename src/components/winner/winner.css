@@ -40,8 +40,21 @@
 }
 
 .winner button {
+  width: 135px;
   position: absolute;
   top: 60%;
   left: calc(50% - 67px);
   background-color: var(--color-bg-variant);
+}
+
+@media (max-width: 1060px) { 
+  .winner__container {
+    bottom: calc(50% - 498px);
+  }
+}
+
+@media (max-width: 640px) {
+  .winner__container {
+    bottom: -155vh
+  }
 }
