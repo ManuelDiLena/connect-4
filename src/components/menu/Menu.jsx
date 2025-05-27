@@ -17,9 +17,9 @@ const Menu = () => {
           PLAY vs PLAYER 
           <img src={PLAYERICON} className='btn__icon player-icon' alt='player icon' />
         </Link>
-        <button className='main__btn btn__light'>
+        <Link to={'/rules'} className='main__btn btn__light'>
           GAME RULES
-        </button>
+        </Link>
       </div>
     </div>
   );
