@@ -1,13 +1,11 @@
-import { useState } from 'react';
-
 const useCpuPlay = () => {
-  const [cpuPlays, setCpuPlays] = useState([ {prior: 6, column: []},
-                                            {prior: 5, column: []},
-                                            {prior: 4, column: []},
-                                            {prior: 3, column: []},
-                                            {prior: 2, column: []},
-                                            {prior: 1, column: []},
-                                            {prior: 0, column: []} ]);
+  const cpuPlays = [ {prior: 6, column: []},
+                    {prior: 5, column: []},
+                    {prior: 4, column: []},
+                    {prior: 3, column: []},
+                    {prior: 2, column: []},
+                    {prior: 1, column: []},
+                    {prior: 0, column: []} ];
   
   const checkWinPrior = (grid, player, col, row) => {
     let hasPrior = false
@@ -174,7 +172,7 @@ const useCpuPlay = () => {
     return hasPrior
   }
 
-  const check1Prior = (grid, player, col, row) => {
+  const check1Prior = (grid, col, row) => {
     let hasPrior = false
     // vertically
     row-3 >= 0 && (hasPrior = true)
@@ -212,8 +210,8 @@ const useCpuPlay = () => {
       for (let row = 5; row >= 0; row --) {
         if (grid[row][col] === 0) {
           if (checkWinPrior(grid, 2, col, row)) {
-            setCpuPlays([{prior: 6, column: [col]}])
-            return
+            cpuPlays[0].column.push(col)
+            return cpuPlays
           } else {
             if (checkWinPrior(grid, 1, col, row)) {
               cpuPlays[1].column.push(col)
@@ -223,7 +221,7 @@ const useCpuPlay = () => {
               cpuPlays[3].column.push(col)
             } else if (check2Prior(grid, 2, col, row)) {
               cpuPlays[4].column.push(col)
-            } else if (check1Prior(grid, 2, col, row)) {
+            } else if (check1Prior(grid, col, row)) {
               cpuPlays[5].column.push(col)
             } else {
               cpuPlays[5].column.push(col)
@@ -233,26 +231,30 @@ const useCpuPlay = () => {
         }
       }
     }
+    return cpuPlays
   }
 
   const getRandom = (list) => list[Math.floor((Math.random() * list.length))]
 
-  const getCpuColumnPlay = () => {
+  const getCpuColumnPlay = (cpuPlays) => {
+    let col
+    console.log('here', cpuPlays)
     if (cpuPlays[0].column.length === 1) {
-      return cpuPlays[0].column[0]
+      col = cpuPlays[0].column[0]
     } else if (cpuPlays[1].column.length >= 1) {
-      return getRandom(cpuPlays[1].column)
+      col = getRandom(cpuPlays[1].column)
     } else if (cpuPlays[2].column.length >= 1) {
-      return getRandom(cpuPlays[2].column)
+      col = getRandom(cpuPlays[2].column)
     } else if (cpuPlays[3].column.length >= 1) {
-      return getRandom(cpuPlays[3].column)
+      col = getRandom(cpuPlays[3].column)
     } else if (cpuPlays[4].column.length >= 1) {
-      return getRandom(cpuPlays[4].column)
+      col = getRandom(cpuPlays[4].column)
     } else if (cpuPlays[5].column.length >= 1) {
-      return getRandom(cpuPlays[5].column)
+      col = getRandom(cpuPlays[5].column)
     } else if (cpuPlays[6].column.length >= 1) {
-      return getRandom(cpuPlays[6].column)
+      col = getRandom(cpuPlays[6].column)
     }
+    return col
   }
 
   return {
