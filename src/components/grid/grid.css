@@ -35,7 +35,7 @@
 
 .disk {
   position: absolute;
-  z-index: 1;
+  z-index: -1;
   width: 11.08%;
   height: 11.98%;
 }

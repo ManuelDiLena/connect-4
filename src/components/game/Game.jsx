@@ -7,7 +7,6 @@ import PLAYERCPU from '../../assets/player-cpu.png';
 import BLACKBOARD from '../../assets/board-black.svg';
 import WHITEBOARD from '../../assets/board-white.svg';
 import { usePlay } from '../../hooks/usePlay';
-import { useCpuPlay } from '../../hooks/useCpuPlay'; 
 import Grid from '../grid/Grid';
 import Timer from '../timer/Timer';
 import Winner from '../winner/Winner';

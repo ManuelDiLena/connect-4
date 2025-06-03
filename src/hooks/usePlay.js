@@ -94,7 +94,6 @@ const usePlay = () => {
     row = Number(row)
     col = Number(col)
     // vertically
-    // -3 >= 0 && (grid[row-1][col] === player) && (grid[row-2][col] === player) && (grid[row-3][col] === player) && setWhoWins(player, [[row,col],[row-1,col],[row-2,col],[row-3,col]])
     row+3 <= 5 && (grid[row+1][col] === player) && (grid[row+2][col] === player) && (grid[row+3][col] === player) && setWhoWins(player, [[row,col],[row+1,col],[row+2,col],[row+3,col]])
     // horizontally
     col-3 >= 0 && (grid[row][col-1] === player) && (grid[row][col-2] === player) && (grid[row][col-3] === player) && setWhoWins(player, [[row,col],[row,col-1],[row,col-2],[row,col-3]])

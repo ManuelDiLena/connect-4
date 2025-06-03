@@ -11,13 +11,10 @@ import './grid.css';
 const Grid = ({ grid, setNewDisk, winner, wait, player, winnerPos, width, cpu }) => {
     const { checkGrid, getCpuColumnPlay } = useCpuPlay();
     const [hover, setHover] = useState(null);
-    // const gridPositionRow = [16,104,192,280,368,456];
-    // const gridPositionColumn = [18,105,193,281,369,457,545];
     const gridPositionRow = [2.74,17.81,32.87,47.94,63.01,78.08];
     const gridPositionColumn = [2.85,16.61,30.54,44.46,58.38,72.31,86.23];
 
     useEffect(() => {
-      let col = -false
       cpu && player === 2 && (setNewDisk(getCpuColumnPlay(checkGrid(grid))))
     }, [player])
 

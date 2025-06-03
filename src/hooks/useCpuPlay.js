@@ -1,12 +1,4 @@
-const useCpuPlay = () => {
-  const cpuPlays = [ {prior: 6, column: []},
-                    {prior: 5, column: []},
-                    {prior: 4, column: []},
-                    {prior: 3, column: []},
-                    {prior: 2, column: []},
-                    {prior: 1, column: []},
-                    {prior: 0, column: []} ];
-  
+const useCpuPlay = () => {  
   const checkWinPrior = (grid, player, col, row) => {
     let hasPrior = false
     // vertically
@@ -206,6 +198,14 @@ const useCpuPlay = () => {
   }
 
   const checkGrid = (grid) => {
+    const cpuPlays = [ {prior: 6, column: []},
+                    {prior: 5, column: []},
+                    {prior: 4, column: []},
+                    {prior: 3, column: []},
+                    {prior: 2, column: []},
+                    {prior: 1, column: []},
+                    {prior: 0, column: []}, 
+                    {prior: -1, column: []}];
     for (let col = 0; col < 7; col ++) {
       for (let row = 5; row >= 0; row --) {
         if (grid[row][col] === 0) {
@@ -215,6 +215,8 @@ const useCpuPlay = () => {
           } else {
             if (checkWinPrior(grid, 1, col, row)) {
               cpuPlays[1].column.push(col)
+            } else if (row -1 >= 0 && checkWinPrior(grid, 1, col, row - 1)) {
+              cpuPlays[7].column.push(col) // this line is to avoid giving a chance
             } else if (check3Prior(grid, 2, col, row)) {
               cpuPlays[2].column.push(col)
             } else if (check3Prior(grid, 1, col, row)) {
@@ -253,6 +255,8 @@ const useCpuPlay = () => {
       col = getRandom(cpuPlays[5].column)
     } else if (cpuPlays[6].column.length >= 1) {
       col = getRandom(cpuPlays[6].column)
+    } else if (cpuPlays[7].column.length >= 1) {
+      col = getRandom(cpuPlays[7].column)
     }
     return col
   }
