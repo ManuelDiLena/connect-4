@@ -1,25 +1,34 @@
-import { Link } from 'react-router-dom';
 import './menu.css';
+import { useCpu } from '../../context/CpuContext';
+import { useNavigate } from 'react-router-dom';
 import LOGO from '../../assets/main-logo.png';
 import CPUICON from '../../assets/cpu-icon.png';
 import PLAYERICON from '../../assets/player-icon.png';
 
-const Menu = ({ setCpu }) => {
+const Menu = () => {
+  const { setCpu } = useCpu();
+  const navigate = useNavigate();
+
+  const startGame = (isCpu) => {
+    setCpu(isCpu);
+    navigate('/game');
+  };
+
   return (
     <div className='main__container btns__container'>
       <div className='main__content'>
         <img src={LOGO} className='main__logo' alt='logo' />
-        <Link to={'/game'} className='main__btn btn__pink' onClick={() => setCpu(true)}>
+        <button className='main__btn btn__pink' onClick={() => startGame(true)}>
           PLAY vs CPU 
           <img src={CPUICON} className='btn__icon cpu-icon' alt='cpu icon' />
-        </Link>
-        <Link to={'/game'} className='main__btn btn__yellow' onClick={() => setCpu(false)}>
+        </button>
+        <button className='main__btn btn__yellow' onClick={() => startGame(false)}>
           PLAY vs PLAYER 
           <img src={PLAYERICON} className='btn__icon player-icon' alt='player icon' />
-        </Link>
-        <Link to={'/rules'} className='main__btn btn__light'>
+        </button>
+        <button className='main__btn btn__light'onClick={() => navigate('/rules')}>
           GAME RULES
-        </Link>
+        </button>
       </div>
     </div>
   );

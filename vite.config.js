@@ -13,4 +13,5 @@ export default defineConfig({
       },
     })
   ],
+  base: 'https://ManuelDiLena.github.io/connect-4',
 });

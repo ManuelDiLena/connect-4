@@ -6,13 +6,15 @@ import PLAYER2 from '../../assets/player-2.png';
 import PLAYERCPU from '../../assets/player-cpu.png';
 import BLACKBOARD from '../../assets/board-black.svg';
 import WHITEBOARD from '../../assets/board-white.svg';
+import { useCpu } from '../../context/CpuContext';
 import { usePlay } from '../../hooks/usePlay';
 import Grid from '../grid/Grid';
 import Timer from '../timer/Timer';
 import Winner from '../winner/Winner';
 import Modal from '../modal/Modal';
 
-const Game = ({ cpu }) => {
+const Game = () => {
+  const { cpu } = useCpu();
   const width = window.innerWidth;
   const { grid, setNewDisk, player, timerCounter, setTimerCounter, winner, player1Wins, player2Wins, setWhoWins, playAgain, wait, winnerPos, pause, setPause } = usePlay();
 
